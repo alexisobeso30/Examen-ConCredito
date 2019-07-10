@@ -1,0 +1,130 @@
+============================================================================================================
+================Creación de la BD===========================================================================
+============================================================================================================
+
+CREATE DATABASE Escuela
+
+============================================================================================================
+================Creación de las tablas que conforman la BD==================================================
+============================================================================================================
+
+Create table Profesores
+(
+Prof_ID integer PRIMARY KEY AUTO_INCREMENT,
+Prof_Nombre varchar(25),
+Prof_ApellidoP varchar(15),
+Prof_ApellidoM varchar(15)
+,
+Prof_Sexo char(1),
+Prof_FechaNacimiento Date
+);
+
+Create table Grado
+(
+Grado_ID integer PRIMARY KEY AUTO_INCREMENT,
+
+Grado_Descripcion Varchar(50),
+
+Prof_iD Int References Profesores (Prof_ID)
+);
+
+Create table Asignatura
+(
+Asig_ID integer PRIMARY KEY AUTO_INCREMENT,
+
+Asig_Nombre varchar(30),
+
+Grado_ID integer References Grado (Grado_ID),
+
+Prof_ID integer references Profesores (Prof_ID)
+);
+
+Create table Estudiantes
+(
+Est_ID integer PRIMARY KEY AUTO_INCREMENT
+,
+Est_Nombre varchar(25),
+
+Est_ApellidoP varchar(15)
+,
+Est_ApellidoM varchar(15),
+
+Est_Sexo Char(1),
+
+Est_FechaNacimiento datetime,
+
+Est_Grado integer References Grado (Grado_ID)
+);
+
+Create table Calificaciones
+(
+Calificacion integer PRIMARY KEY,
+
+Est_ID integer References Estudiantes (Est_ID),
+
+Asig_ID integer References Asignatura (Asig_ID)
+);
+
+
+============================================================================================================
+================Inserción de registros en las tablas de la BD===============================================
+============================================================================================================
+
+Insert into Profesores (Prof_Nombre, Prof_ApellidoP, Prof_ApellidoM, Prof_Sexo, Prof_FechaNacimiento) Values ('José', 'Perez', 'Gonzalez', 'M', '06-05-1970');
+Insert into Profesores (Prof_Nombre, Prof_ApellidoP, Prof_ApellidoM, Prof_Sexo, Prof_FechaNacimiento) Values ('María', 'Reyes', 'Orrantia', 'F', '09-07-1984');
+Insert into Profesores (Prof_Nombre, Prof_ApellidoP, Prof_ApellidoM, Prof_Sexo, Prof_FechaNacimiento) Values ('Alberto', 'Contreras', 'León', 'M', '16-12-1977');
+
+Insert into Grado (Grado_Descripcion, Prof_iD) Values ('Primero', '1');
+Insert into Grado (Grado_Descripcion, Prof_iD) Values ('Segundo', '2');
+Insert into Grado (Grado_Descripcion, Prof_iD) Values ('Tercero', '3');
+
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Español', '1', '1');
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Matematicas', '1', '2');
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Ciencias', '2', '3');
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Sociales', '2', '1');
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Programación', '3', '2');
+Insert into Asignatura (Asig_Nombre, Grado_ID, Prof_ID) Values ('Inglés', '3', '3');
+
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Alexis', 'Obeso', 'Machado', 'M', '30-09-1991', '1');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Jesús', 'Leal', 'Rosas', 'M', '10-06-1995', '1');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Laura', 'Mendoza', 'Camacho', 'F', '12-11-1993', '1');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Ana', 'Bastidas', 'Rocha', 'F', '16-02-1992', '1');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Juan', 'Luna', 'Medina', 'M', '11-04-1994', '2');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Rey', 'Duarte', 'Robles', 'M', '21-05-1995', '2');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Liliana', 'Villa', 'Sosa', 'F', '26-01-1991', '2');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Sandra', 'Moreno', 'Campos', 'F', '16-09-1992', '2');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Pedro', 'Osorio', 'Martinez', 'M', '12-07-1994', '3');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Manuel', 'Zazueta', 'Benitez', 'M', '14-08-1993', '3');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Guadalupe', 'Navarro', 'Mercado', 'F', '12-12-1992', '3');
+Insert into Estudiantes (Est_Nombre, Est_ApellidoP, Est_ApellidoM, Est_Sexo, Est_FechaNacimiento, Est_Grado) Values ('Dora', 'Nevarez', 'Osuna', 'F', '02-11-1991', '3');
+
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('90', '1','1');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('80', '2','2');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('75', '3','3');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('100', '4','4');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('95', '5','5');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('75', '6','6');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('70', '7','1');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('85', '8','2');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('95', '9','3');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('72', '10','4');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('88', '11','5');
+Insert into Calificaciones (Calificación, Est_ID, Asig_ID) Values ('93', '12','6');
+
+
+============================================================================================================
+================Consulta de los mejores alumnos (Top 10%) ordenados por su calificación=====================
+============================================================================================================
+
+Select Concat (e.Est_Nombre, " ", e.Est_ApellidoP, " ", e.Est_ApellidoM) as Estudiante, Concat (p.Prof_Nombre, " ", p.Prof_ApellidoP, " ", p.Prof_ApellidoM) as Profesor
+a.Asig_Nombre as Asignatura, g.Grado_Descripcion as Grado, TOP 10 PERCENT c.Calificación
+From Profesores p, Grado g, Asignatura a, Estudiates e, Calificaciones c
+where p.Prof_ID = g.Prof_ID
+and p.Prof_ID = a.Prof_ID
+and g.Grado_ID = a.Grado_ID
+and g.Grado_ID = e.Est_Grado
+and a.Est_ID = c.Est_ID
+Order By c.Calificación Desc
+
+
+
